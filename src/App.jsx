@@ -30,6 +30,19 @@ export class App extends Component {
     ],
   };
 
+  componentDidMount() {
+    const movies = JSON.parse(localStorage.getItem('movies'));
+    if (!movies) {
+      this.setState({
+        movies: [],
+      });
+    } else {
+      this.setState({
+        movies: [...movies],
+      });
+    }
+  }
+
   toggleToWatch = (id) => {
     this.setState((state) => {
       const movies = state.movies.map((movie) => {
