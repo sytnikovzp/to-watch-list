@@ -31,15 +31,16 @@ export class App extends Component {
   };
 
   toggleToWatch = (id) => {
-    this.setState({
-      movies: this.state.movies.map((movie) => {
+    this.setState((state) => {
+      const movies = state.movies.map((movie) => {
         if (movie.id !== id) {
           return movie;
         }
         return { ...movie, isDone: !movie.isDone };
-      }),
+      });
+      this.saveMovies(movies);
+      return { movies };
     });
-    this.saveMovies();
   };
 
   addMovie = (movie) => {
@@ -55,8 +56,8 @@ export class App extends Component {
     });
   };
 
-  saveMovies = () => {
-    localStorage.setItem('movies', JSON.stringify(this.state.movies));
+  saveMovies = (arrMovies) => {
+    localStorage.setItem('movies', JSON.stringify(arrMovies));
   };
 
   render() {
