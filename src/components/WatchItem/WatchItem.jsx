@@ -3,12 +3,14 @@ import './WatchItem.css';
 
 export class WatchItem extends Component {
   render() {
+    const { id, title, isDone } = this.props.movie;
+    // const onToggle = this.props.onToggle;
     return (
       <div
-        className={'watch-item ' + (this.props.movie.isDone ? 'done' : '')}
-        onClick={() => {}}
+        className={'watch-item ' + (isDone ? 'done' : '')}
+        onClick={() => this.props.onToggle(id)}
       >
-        <p className='content'>{this.props.movie.title}</p>
+        <p className='content'>{title}</p>
         <span className='delete-btn'>X</span>
       </div>
     );

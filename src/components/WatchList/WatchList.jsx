@@ -6,7 +6,11 @@ export class WatchList extends Component {
     return (
       <>
         {this.props.movies.map((movie) => {
-          return <WatchItem key={movie.id} movie={movie} />;
+          return <WatchItem 
+          key={movie.id} 
+          movie={movie} 
+          onToggle={this.props.onToggle}
+          />;
         })}
       </>
     );

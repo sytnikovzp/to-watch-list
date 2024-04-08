@@ -29,10 +29,21 @@ export class App extends Component {
     ],
   };
 
+  toggleToWatch = (id) => {
+    this.setState({
+      movies: this.state.movies.map((movie) => {
+        if (movie.id !== id) {
+          return movie;
+        }
+        return { ...movie, isDone: !movie.isDone };
+      }),
+    });
+  };
+
   render() {
     return (
       <>
-        <WatchList movies={this.state.movies} />
+        <WatchList movies={this.state.movies} onToggle={this.toggleToWatch} />
         <WatchForm />
       </>
     );
