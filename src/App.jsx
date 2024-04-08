@@ -81,6 +81,7 @@ export class App extends Component {
   render() {
     return (
       <>
+        <h1>To watch list</h1>
         <WatchList
           movies={this.state.movies}
           onToggle={this.toggleToWatch}
