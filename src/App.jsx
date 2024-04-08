@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import WatchList from './components/WatchList/WatchList';
 import WatchForm from './components/WatchForm/WatchForm';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -40,11 +41,18 @@ export class App extends Component {
     });
   };
 
+  addMovie = (movie) => {
+    movie.id = nanoid(3);
+    this.setState({
+      movies: [...this.state.movies, movie],
+    });
+  };
+
   render() {
     return (
       <>
         <WatchList movies={this.state.movies} onToggle={this.toggleToWatch} />
-        <WatchForm />
+        <WatchForm onSubmit={this.addMovie}/>
       </>
     );
   }

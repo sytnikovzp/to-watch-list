@@ -12,9 +12,17 @@ export class WatchForm extends Component {
     });
   };
 
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.props.onSubmit({
+      title: this.state.movieTitle,
+      isDone: false,
+    });
+  };
+
   render() {
     return (
-      <form className='watch-form'>
+      <form className='watch-form' onSubmit={this.onFormSubmit}>
         <input
           type='text'
           value={this.state.movieTitle}
