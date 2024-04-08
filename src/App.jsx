@@ -2,7 +2,8 @@ import { Component } from 'react';
 import './App.css';
 import WatchList from './components/WatchList/WatchList';
 import WatchForm from './components/WatchForm/WatchForm';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid'
+
 
 export class App extends Component {
   state = {
@@ -44,9 +45,12 @@ export class App extends Component {
   };
 
   addMovie = (movie) => {
+    const nanoid = customAlphabet('1234567890', 5)
     movie.id = nanoid(3);
-    this.setState({
-      movies: [...this.state.movies, movie],
+    this.setState((state) => {
+      const movies = [...state.movies, movie];
+      this.saveMovies(movies);
+      return { movies };
     });
   };
 
