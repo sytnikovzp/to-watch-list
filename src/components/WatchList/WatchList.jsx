@@ -11,6 +11,7 @@ export class WatchList extends Component {
               key={movie.id}
               movie={movie}
               onToggle={this.props.onToggle}
+              onDelete={this.props.onDelete}
             />
           );
         })}

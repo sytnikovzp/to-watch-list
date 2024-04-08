@@ -48,11 +48,19 @@ export class App extends Component {
     });
   };
 
+  deleteMovie = (id) => {
+    this.setState({
+      movies: [...this.state.movies.filter((movie) => movie.id !== id)],
+    });
+  };
+
   render() {
     return (
       <>
-        <WatchList movies={this.state.movies} onToggle={this.toggleToWatch} />
-        <WatchForm onSubmit={this.addMovie}/>
+        <WatchList movies={this.state.movies} onToggle={this.toggleToWatch} 
+        onDelete={this.deleteMovie}
+        />
+        <WatchForm onSubmit={this.addMovie} />
       </>
     );
   }
