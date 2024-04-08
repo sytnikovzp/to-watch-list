@@ -18,6 +18,9 @@ export class WatchForm extends Component {
       title: this.state.movieTitle,
       isDone: false,
     });
+    this.setState({
+      movieTitle: '',
+    });
   };
 
   render() {
