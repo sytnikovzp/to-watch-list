@@ -39,6 +39,7 @@ export class App extends Component {
         return { ...movie, isDone: !movie.isDone };
       }),
     });
+    this.saveMovies();
   };
 
   addMovie = (movie) => {
@@ -54,11 +55,17 @@ export class App extends Component {
     });
   };
 
+  saveMovies = () => {
+    localStorage.setItem('movies', JSON.stringify(this.state.movies));
+  };
+
   render() {
     return (
       <>
-        <WatchList movies={this.state.movies} onToggle={this.toggleToWatch} 
-        onDelete={this.deleteMovie}
+        <WatchList
+          movies={this.state.movies}
+          onToggle={this.toggleToWatch}
+          onDelete={this.deleteMovie}
         />
         <WatchForm onSubmit={this.addMovie} />
       </>
