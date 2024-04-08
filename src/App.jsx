@@ -57,8 +57,8 @@ export class App extends Component {
   };
 
   addMovie = (movie) => {
-    const nanoid = customAlphabet('1234567890', 5);
-    movie.id = nanoid(3);
+    const nanoid = customAlphabet('1234567890', 3);
+    movie.id = nanoid();
     this.setState((state) => {
       const movies = [...state.movies, movie];
       this.saveMovies(movies);

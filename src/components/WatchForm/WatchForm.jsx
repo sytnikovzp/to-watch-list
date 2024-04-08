@@ -15,6 +15,7 @@ export class WatchForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit({
+      id: 0, // Здесь добавил нулевой ИД
       title: this.state.movieTitle,
       isDone: false,
     });
