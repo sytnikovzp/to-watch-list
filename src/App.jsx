@@ -43,6 +43,10 @@ export class App extends Component {
     }
   }
 
+  // componentDidUpdate(){
+  //   console.log('Component was updated!')
+  // }
+
   toggleToWatch = (id) => {
     this.setState((state) => {
       const movies = state.movies.map((movie) => {

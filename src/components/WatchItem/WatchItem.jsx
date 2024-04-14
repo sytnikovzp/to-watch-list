@@ -7,6 +7,17 @@ export class WatchItem extends Component {
     this.props.onDelete(this.props.movie.id);
   };
 
+  // componentDidMount() {
+  //   this.idInter = setInterval(() => {
+  //     console.log(`${Date.now()}`);
+  //   }, 5000);
+  // }
+
+  // componentWillUnmount() {
+  //   console.log('Clear interval');
+  //   clearInterval(this.idInter);
+  // }
+
   render() {
     const { id, title, isDone } = this.props.movie;
     const onToggle = this.props.onToggle;
