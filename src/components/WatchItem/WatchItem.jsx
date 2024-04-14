@@ -19,14 +19,14 @@ export class WatchItem extends Component {
   // }
 
   render() {
-    const { id, title, isDone } = this.props.movie;
+    const { id, title, director, isDone } = this.props.movie;
     const onToggle = this.props.onToggle;
     return (
       <div
         className={'watch-item ' + (isDone ? 'done' : '')}
         onClick={() => onToggle(id)}
       >
-        <p className='content'>{title}</p>
+        <p className='content'>{title} directed by {director}</p>
         <span className='delete-btn' onClick={this.onMovieDelete}>
           X
         </span>

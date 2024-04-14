@@ -4,23 +4,25 @@ import './WatchForm.css';
 export class WatchForm extends Component {
   state = {
     movieTitle: '',
+    director: '',
   };
 
   onInputChange = (event) => {
     this.setState({
-      movieTitle: event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit({
-      id: 0, // Здесь добавил нулевой ИД
       title: this.state.movieTitle,
+      director: this.state.director,
       isDone: false,
     });
     this.setState({
       movieTitle: '',
+      director: '',
     });
   };
 
@@ -29,7 +31,14 @@ export class WatchForm extends Component {
       <form className='watch-form' onSubmit={this.onFormSubmit}>
         <input
           type='text'
+          name='movieTitle'
           value={this.state.movieTitle}
+          onChange={this.onInputChange}
+        />
+        <input
+          type='text'
+          name='director'
+          value={this.state.director}
           onChange={this.onInputChange}
         />
         <button className='btn'>Add</button>
