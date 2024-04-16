@@ -15,8 +15,6 @@ export class WatchList extends Component {
   }
 
   render() {
-    console.log(this.state.count);
-    console.log(this.props.movies);
     return (
       <>
         {this.props.movies.map((movie) => {
