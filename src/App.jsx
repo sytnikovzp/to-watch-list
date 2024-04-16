@@ -1,79 +1,63 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import WatchList from './components/WatchList/WatchList';
 import WatchForm from './components/WatchForm/WatchForm';
 import { customAlphabet } from 'nanoid';
 
-export class App extends Component {
-  state = {
-    movies: [],
-  };
+function App() {
+  const [arrMovies, setArrMovies] = useState([]);
 
-  componentDidMount() {
+  useEffect(getFromStorage, []);
+
+  function getFromStorage() {
     const movies = JSON.parse(localStorage.getItem('movies'));
     if (!movies) {
-      this.setState({
-        movies: [],
-      });
+      setArrMovies([]);
     } else {
-      this.setState({
-        movies: [...movies],
-      });
+      setArrMovies(movies);
     }
   }
 
-  // componentDidUpdate(){
-  //   console.log('Component was updated!')
-  // }
-
-  toggleToWatch = (id) => {
-    this.setState((state) => {
-      const movies = state.movies.map((movie) => {
-        if (movie.id !== id) {
-          return movie;
-        }
-        return { ...movie, isDone: !movie.isDone };
-      });
-      this.saveMovies(movies);
-      return { movies };
+  function toggleToWatch(id) {
+    const movies = arrMovies.map((movie) => {
+      if (movie.id !== id) {
+        return movie;
+      }
+      return { ...movie, isDone: !movie.isDone };
     });
-  };
+    setArrMovies(movies);
+    saveMovies(movies);
+  }
 
-  addMovie = (movie) => {
+  const addMovie = (movie) => {
     const nanoid = customAlphabet('1234567890', 3);
     movie.id = nanoid();
-    this.setState((state) => {
-      const movies = [...state.movies, movie];
-      this.saveMovies(movies);
-      return { movies };
-    });
+    const movies = [...arrMovies, movie];
+    setArrMovies(movies);
+    saveMovies(movies);
   };
 
-  deleteMovie = (id) => {
-    this.setState((state) => {
-      const movies = state.movies.filter((movie) => movie.id !== id);
-      this.saveMovies(movies);
-      return { movies };
-    });
+  const deleteMovie = (id) => {
+    const movies = arrMovies.filter((movie) => movie.id !== id);
+    setArrMovies(movies);
+    saveMovies(movies);
   };
 
-  saveMovies = (arrMovies) => {
-    localStorage.setItem('movies', JSON.stringify(arrMovies));
+  const saveMovies = (movies) => {
+    localStorage.setItem('movies', JSON.stringify(movies));
   };
 
-  render() {
-    return (
-      <>
-        <h1>To watch list</h1>
-        <WatchList
-          movies={this.state.movies}
-          onToggle={this.toggleToWatch}
-          onDelete={this.deleteMovie}
-        />
-        <WatchForm onSubmit={this.addMovie} />
-      </>
-    );
-  }
+  return (
+    <>
+      <h1>To watch list</h1>
+      <WatchList
+        movies={arrMovies}
+        onToggle={toggleToWatch}
+        onDelete={deleteMovie}
+      />
+      <WatchForm onSubmit={addMovie} />
+    </>
+  );
 }
 
 export default App;
