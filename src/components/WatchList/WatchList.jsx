@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import WatchItem from '../WatchItem/WatchItem';
 
 function WatchList({ movies, onToggle, onDelete }) {
@@ -22,6 +23,16 @@ function WatchList({ movies, onToggle, onDelete }) {
       })}
     </>
   );
+}
+
+WatchList.propTypes = {
+	movies: PropTypes.array,
+	onToggle: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired,
+}
+
+WatchList.defaultProps = {
+	string: 'Hello',
 }
 
 export default WatchList;
