@@ -3,20 +3,13 @@ import PropTypes from 'prop-types';
 import WatchItem from '../WatchItem/WatchItem';
 import { MovieContext } from '../../context';
 
-function WatchList({ onToggle, onDelete }) {
+function WatchList() {
   const { arrMovies } = useContext(MovieContext);
 
   return (
     <>
       {arrMovies.map((movie) => {
-        return (
-          <WatchItem
-            key={movie.id}
-            movie={movie}
-            // onToggle={onToggle}
-            // onDelete={onDelete}
-          />
-        );
+        return <WatchItem key={movie.id} movie={movie} />;
       })}
     </>
   );
@@ -24,8 +17,6 @@ function WatchList({ onToggle, onDelete }) {
 
 WatchList.propTypes = {
   movies: PropTypes.array,
-  // onToggle: PropTypes.func.isRequired,
-  // onDelete: PropTypes.func.isRequired,
 };
 
 WatchList.defaultProps = {
