@@ -12,6 +12,8 @@ function WatchForm({ onSubmit }) {
       director: director.value,
       isDone: false,
     });
+    title.onReset();
+    director.onReset();
   };
 
   return (
