@@ -13,7 +13,14 @@
       "postId": 1
     }
   ],
-  "watch": [],
+  "watch": [
+    {
+      "title": "BTTF",
+      "director": "Zemekis",
+      "isDone": false,
+      "id": 1
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

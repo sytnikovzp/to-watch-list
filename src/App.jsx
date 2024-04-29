@@ -3,6 +3,7 @@ import './App.css';
 import WatchList from './components/WatchList/WatchList';
 import WatchForm from './components/WatchForm/WatchForm';
 import api from './api/movie-service';
+import { MovieContext } from './context';
 
 function App() {
   const [arrMovies, setArrMovies] = useState([]);
@@ -47,13 +48,21 @@ function App() {
 
   return (
     <>
-      <h1>To watch list</h1>
-      <WatchList
-        movies={arrMovies}
-        onToggle={toggleToWatch}
-        onDelete={deleteMovie}
-      />
-      <WatchForm onSubmit={addMovie} />
+      <MovieContext.Provider
+        value={{
+          arrMovies,
+          onToggle: toggleToWatch,
+          onDelete: deleteMovie,
+        }}
+      >
+        <h1>To watch list</h1>
+        <WatchList
+        // movies={arrMovies}
+        // onToggle={toggleToWatch}
+        // onDelete={deleteMovie}
+        />
+        <WatchForm onSubmit={addMovie} />
+      </MovieContext.Provider>
     </>
   );
 }
