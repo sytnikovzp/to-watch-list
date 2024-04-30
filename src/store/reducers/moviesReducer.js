@@ -1,4 +1,4 @@
-import { moviesState } from '../../model/initialMovies';
+import { moviesState } from '../../model/initialStates';
 import ACTION_TYPES from '../actions/actionTypes';
 
 const initialState = {
