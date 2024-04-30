@@ -1,26 +1,46 @@
-import { useContext } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import WatchItem from '../WatchItem/WatchItem';
-import { MovieContext } from '../../context';
+import { connect } from 'react-redux';
+import { getMovies } from '../../store/actions/movieActions';
+import { useEffect } from 'react';
+import api from '../../api/movie-service';
 
-function WatchList() {
-  const { arrMovies } = useContext(MovieContext);
+function WatchList({ movies, getMovies }) {
+  useEffect(() => {
+    api.get('/').then(({ data }) => getMovies(data));
+  });
 
   return (
     <>
-      {arrMovies.map((movie) => {
+      {movies.map((movie) => {
         return <WatchItem key={movie.id} movie={movie} />;
       })}
     </>
   );
 }
 
-WatchList.propTypes = {
-  movies: PropTypes.array,
-};
+// WatchList.propTypes = {
+//   movies: PropTypes.array,
+// };
 
-WatchList.defaultProps = {
-  string: 'Hello',
-};
+// WatchList.defaultProps = {
+//   string: 'Hello',
+// };
 
-export default WatchList;
+// function mapStateToProps({ movies }) {
+//   return {
+//     movies,
+//   };
+// }
+
+const mapStateToProps = ({ movies }) => ({ movies });
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     getMovies: (movies) => dispatch(getMovies(movies)),
+//   };
+// }
+
+const mapDispatchToProps = { getMovies };
+
+export default connect(mapStateToProps, mapDispatchToProps)(WatchList);
