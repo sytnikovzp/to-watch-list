@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import WatchItem from '../WatchItem/WatchItem';
 import { connect } from 'react-redux';
 import { getMovies } from '../../store/actions/movieActions';
@@ -8,7 +7,7 @@ import api from '../../api/movie-service';
 function WatchList({ movies, getMovies }) {
   useEffect(() => {
     api.get('/').then(({ data }) => getMovies(data));
-  });
+  }, []);
 
   return (
     <>
@@ -18,14 +17,6 @@ function WatchList({ movies, getMovies }) {
     </>
   );
 }
-
-// WatchList.propTypes = {
-//   movies: PropTypes.array,
-// };
-
-// WatchList.defaultProps = {
-//   string: 'Hello',
-// };
 
 // function mapStateToProps({ movies }) {
 //   return {
