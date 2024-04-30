@@ -1,17 +1,23 @@
 import { useField } from '../../hooks';
+import { useDispatch } from 'react-redux';
+import api from '../../api/movie-service';
+import { addMovie } from '../../store/actions/movieActions';
 import './WatchForm.css';
 
-function WatchForm({ onSubmit }) {
+function WatchForm() {
   const title = useField('');
   const director = useField('');
 
+  const dispatch = useDispatch();
+
   const onFormSubmit = (event) => {
     event.preventDefault();
-    onSubmit({
+    const newMovie = {
       title: title.value,
       director: director.value,
       isDone: false,
-    });
+    };
+    api.post('/watch', newMovie).then(({ data }) => dispatch(addMovie(data)));
     title.onReset();
     director.onReset();
   };

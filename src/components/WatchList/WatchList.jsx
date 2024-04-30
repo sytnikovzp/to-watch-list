@@ -6,7 +6,7 @@ import api from '../../api/movie-service';
 
 function WatchList({ movies, getMovies }) {
   useEffect(() => {
-    api.get('/').then(({ data }) => getMovies(data));
+    api.get('/watch').then(({ data }) => getMovies(data));
   }, []);
 
   return (
