@@ -21,49 +21,10 @@
       "id": 1
     },
     {
+      "title": "",
+      "director": "",
+      "isDone": true,
       "id": 2
-    },
-    {
-      "title": "",
-      "director": "",
-      "isDone": false,
-      "id": 3
-    },
-    {
-      "title": "",
-      "director": "",
-      "isDone": false,
-      "id": 4
-    },
-    {
-      "title": "",
-      "director": "",
-      "isDone": false,
-      "id": 5
-    },
-    {
-      "title": "sdf",
-      "director": "sdf",
-      "isDone": false,
-      "id": 6
-    },
-    {
-      "title": "",
-      "director": "",
-      "isDone": false,
-      "id": 7
-    },
-    {
-      "title": "",
-      "director": "",
-      "isDone": false,
-      "id": 8
-    },
-    {
-      "title": "",
-      "director": "",
-      "isDone": false,
-      "id": 9
     }
   ],
   "profile": {

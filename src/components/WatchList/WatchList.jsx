@@ -1,13 +1,17 @@
 import WatchItem from '../WatchItem/WatchItem';
-import { connect } from 'react-redux';
 import { getMovies } from '../../store/actions/movieActions';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../../api/movie-service';
 
-function WatchList({ movies, getMovies }) {
+function WatchList() {
+  const dispatch = useDispatch();
+
+  const movies = useSelector((state) => state.movies);
+
   useEffect(() => {
-    api.get('/watch').then(({ data }) => getMovies(data));
-  }, []);
+    api.get('/watch').then(({ data }) => dispatch(getMovies(data)));
+  }, [dispatch]);
 
   return (
     <>
@@ -18,20 +22,4 @@ function WatchList({ movies, getMovies }) {
   );
 }
 
-// function mapStateToProps({ movies }) {
-//   return {
-//     movies,
-//   };
-// }
-
-const mapStateToProps = ({ movies }) => ({ movies });
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     getMovies: (movies) => dispatch(getMovies(movies)),
-//   };
-// }
-
-const mapDispatchToProps = { getMovies };
-
-export default connect(mapStateToProps, mapDispatchToProps)(WatchList);
+export default WatchList;
