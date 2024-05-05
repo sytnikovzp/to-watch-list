@@ -1,4 +1,7 @@
-import { takeLatest, takeEvery, takeLeading } from 'redux-saga/effects';
+import { takeLatest, 
+  // takeEvery, 
+  // takeLeading 
+} from 'redux-saga/effects';
 import ACTION_TYPES from '../store/actions/actionTypes';
 import {
   getMoviesSaga,

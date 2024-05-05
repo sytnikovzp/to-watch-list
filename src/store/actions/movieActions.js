@@ -57,10 +57,10 @@ export const delMovieError = (error) => {
 };
 
 // Updating
-export const toggleMovieAction = (id) => {
+export const toggleMovieAction = (movie) => {
   return {
     type: ACTION_TYPES.PUT_MOVIE_ACTION,
-    payload: id,
+    payload: movie,
   };
 };
 
