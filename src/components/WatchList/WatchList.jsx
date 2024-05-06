@@ -1,7 +1,7 @@
-import WatchItem from '../WatchItem/WatchItem';
-import { getMoviesAction } from '../../store/actions/movieActions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getMoviesAction } from '../../store/actions/movieActions';
+import WatchItem from '../WatchItem/WatchItem';
 
 function WatchList() {
   const dispatch = useDispatch();

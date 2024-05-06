@@ -1,5 +1,5 @@
-import { useField } from '../../hooks';
 import { useDispatch } from 'react-redux';
+import { useField } from '../../hooks';
 import { addMovieAction } from '../../store/actions/movieActions';
 import './WatchForm.css';
 

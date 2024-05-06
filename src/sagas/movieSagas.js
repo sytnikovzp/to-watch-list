@@ -1,5 +1,4 @@
 import { put } from 'redux-saga/effects';
-
 import api from '../api/movie-service';
 
 import {
@@ -53,7 +52,7 @@ export function* deleteMovieSaga({ payload }) {
   yield put(delMovieRequest());
   try {
     yield api
-      .delete(`/watch/${payload}`, payload)
+      .delete(`/watch/${payload}`)
       // .then(({ statusText }) => console.log(statusText));
     yield put(delMovieSuccess(payload));
   } catch (error) {
