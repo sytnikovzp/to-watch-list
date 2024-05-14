@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/movie-service';
 import { moviesState } from '../../model/initialStates';
 import { MOVIE_SLICE_NAME } from '../../constants';
+import api from '../../api/movie-service';
 
 const initialState = {
   movies: moviesState,
@@ -109,7 +109,9 @@ const movieSlice = createSlice({
       });
     },
   },
+
   extraReducers: (builder) => {
+    // Get all
     builder.addCase(getMovies.fulfilled, (state, { payload }) => {
       state.isFetching = false;
       state.error = null;
@@ -117,6 +119,23 @@ const movieSlice = createSlice({
     });
     builder.addCase(getMovies.pending, setFetching);
     builder.addCase(getMovies.rejected, setError);
+
+    // Create
+    builder.addCase(addMovie.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      state.error = null;
+      state.movies.push(payload);
+    });
+    builder.addCase(addMovie.pending, setFetching);
+    builder.addCase(addMovie.rejected, setError);
+
+    // Toggle
+    builder.addCase(toggleMovie.pending, setFetching);
+    builder.addCase(toggleMovie.rejected, setError);
+
+    // Delete
+    builder.addCase(delMovie.pending, setFetching);
+    builder.addCase(delMovie.rejected, setError);
   },
 });
 

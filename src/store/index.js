@@ -6,6 +6,6 @@ export default configureStore({
   // reducer: () => {},
   reducer: {
     movieList: movieReducer,
-    actorList: () => {},
+    // actorList: () => {},
   },
 });
