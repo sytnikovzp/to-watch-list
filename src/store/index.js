@@ -1,10 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
-import { composeWithDevTools } from '@redux-devtools/extension';
-import rootReducer from './reducers';
+import { configureStore } from '@reduxjs/toolkit';
+// import logger from 'redux-logger';
+import movieReducer from './slices/movieSlice';
 
-
-export default createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(logger))
-);
+export default configureStore({
+  // reducer: () => {},
+  reducer: {
+    movieList: movieReducer,
+    actorList: () => {},
+  },
+});
