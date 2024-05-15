@@ -25,17 +25,16 @@ export const getMovies = createAsyncThunk(
   }
 );
 
-export const delMovie = createAsyncThunk(
-  `${MOVIE_SLICE_NAME}/delMovie`,
-  async function (id, { rejectWithValue, dispatch }) {
+export const addMovie = createAsyncThunk(
+  `${MOVIE_SLICE_NAME}/addMovie`,
+  async (movie, { rejectWithValue }) => {
     try {
-      const responce = await api.delete(`/${MOVIE_SLICE_NAME}/${id}`);
+      const responce = await api.post(`/${MOVIE_SLICE_NAME}`, movie);
       if (responce.status >= 400) {
-        throw new Error(
-          `Can't delete movie. Error status is ${responce.status}`
-        );
+        throw new Error(`Can't add movie. Error status is ${responce.status}`);
       }
-      dispatch(removeMovie(id));
+      const { data } = responce;
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -65,16 +64,17 @@ export const toggleMovie = createAsyncThunk(
   }
 );
 
-export const addMovie = createAsyncThunk(
-  `${MOVIE_SLICE_NAME}/addMovie`,
-  async (movie, { rejectWithValue }) => {
+export const delMovie = createAsyncThunk(
+  `${MOVIE_SLICE_NAME}/delMovie`,
+  async function (id, { rejectWithValue, dispatch }) {
     try {
-      const responce = await api.post(`/${MOVIE_SLICE_NAME}`, movie);
+      const responce = await api.delete(`/${MOVIE_SLICE_NAME}/${id}`);
       if (responce.status >= 400) {
-        throw new Error(`Can't add movie. Error status is ${responce.status}`);
+        throw new Error(
+          `Can't delete movie. Error status is ${responce.status}`
+        );
       }
-      const { data } = responce;
-      return data;
+      dispatch(removeMovie(id));
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -99,16 +99,16 @@ const movieSlice = createSlice({
     //   state.movies.push(payload);
     // },
 
-    removeMovie(state, { payload }) {
-      state.movies = [...state.movies.filter((movie) => movie.id !== payload)];
-    },
-
     changeMovie(state, { payload }) {
       state.movies = state.movies.map((movie) => {
         return movie.id === payload
           ? { ...movie, isDone: !movie.isDone }
           : movie;
       });
+    },
+
+    removeMovie(state, { payload }) {
+      state.movies = [...state.movies.filter((movie) => movie.id !== payload)];
     },
   },
 
