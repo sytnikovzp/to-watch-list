@@ -44,21 +44,23 @@ export const delMovie = createAsyncThunk(
 
 export const toggleMovie = createAsyncThunk(
   `${MOVIE_SLICE_NAME}/toggleMovie`,
-  async function (id, { rejectWithValue, dispatch, getState }) {
+  async (id, { rejectWithValue, dispatch, getState }) => {
     const movie = getState().movieList.movies.find((movie) => movie.id === id);
     try {
-      const responce = await api.patch(`/${MOVIE_SLICE_NAME}/${id}`, {
+      const response = await api.patch(`/${MOVIE_SLICE_NAME}/${id}`, {
+        ...movie,
         isDone: !movie.isDone,
       });
-      if (responce.status >= 400) {
+      if (response.status >= 400) {
         throw new Error(
-          `Can't change movie. Error status is ${responce.status}`
+          `Can't change movie. Error status is ${response.status}`
         );
       }
-      const { data } = responce;
-      dispatch(changeMovie(data));
+      const { data } = response;
+      console.log(data);
+      dispatch(changeMovie(id));
     } catch (error) {
-      return rejectWithValue(error.message);
+      rejectWithValue(error.message);
     }
   }
 );
@@ -102,8 +104,8 @@ const movieSlice = createSlice({
     },
 
     changeMovie(state, { payload }) {
-      state.movies.map((movie) => {
-        return movie.id === payload.id
+      state.movies = state.movies.map((movie) => {
+        return movie.id === payload
           ? { ...movie, isDone: !movie.isDone }
           : movie;
       });
@@ -129,7 +131,7 @@ const movieSlice = createSlice({
     builder.addCase(addMovie.pending, setFetching);
     builder.addCase(addMovie.rejected, setError);
 
-    // Toggle
+    // Change
     builder.addCase(toggleMovie.pending, setFetching);
     builder.addCase(toggleMovie.rejected, setError);
 

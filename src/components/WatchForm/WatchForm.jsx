@@ -1,7 +1,6 @@
 import { useField } from '../../hooks';
 import { useDispatch } from 'react-redux';
-import api from '../../api/movie-service';
-import { addMovie } from '../../store/actions/movieActions';
+import { addMovie } from '../../store/slices/movieSlice';
 import './WatchForm.css';
 
 function WatchForm() {
@@ -17,7 +16,7 @@ function WatchForm() {
       director: director.value,
       isDone: false,
     };
-    api.post('/watch', newMovie).then(({ data }) => dispatch(addMovie(data)));
+    dispatch(addMovie(newMovie));
     title.onReset();
     director.onReset();
   };

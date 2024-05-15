@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { toggleMovie, delMovie } from '../../store/actions/movieActions';
-import api from '../../api/movie-service';
+import { toggleMovie, delMovie } from '../../store/slices/movieSlice';
 import './WatchItem.css';
 
 const divStyles = {
@@ -21,18 +20,11 @@ export const WatchItem = ({ movie }) => {
 
   const onMovieDelete = (event) => {
     event.stopPropagation();
-    api
-      .delete(`/watch/${id}`)
-      .then(({ statusText }) => console.log(statusText))
-      .catch((error) => console.log(error));
     dispatch(delMovie(id));
   };
 
   const onMovieToggle = () => {
-    const updatedMovie = { ...movie, isDone: !movie.isDone };
-    api
-      .put(`/watch/${id}`, updatedMovie)
-      .then(({ data }) => dispatch(toggleMovie(data.id)));
+    dispatch(toggleMovie(id));
   };
 
   return (

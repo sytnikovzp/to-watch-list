@@ -1,19 +1,17 @@
 import WatchItem from '../WatchItem/WatchItem';
-import { getMovies } from '../../store/actions/movieActions';
+import { getMovies } from '../../store/slices/movieSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import api from '../../api/movie-service';
 
 function WatchList() {
   const dispatch = useDispatch();
 
-  const movies = useSelector((state) => state.moviesList.movies);
-  const actors = useSelector((state) => state.actorsList.actors);
-
-  console.log(actors);
+  const movies = useSelector((state) => state.movieList.movies);
+  // const actors = useSelector((state) => state.actorsList.actors);
+  // console.log(actors);
 
   useEffect(() => {
-    api.get('/watch').then(({ data }) => dispatch(getMovies(data)));
+    dispatch(getMovies());
   }, [dispatch]);
 
   return (
